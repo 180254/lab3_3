@@ -3,5 +3,5 @@
 About the branches:<br/>
 
 master - base branch<br/>
-faketime - prepared to time-dependent, refactored to use fake system clock pattern.<br/>
-faketime_anotherWay - added time-dependend test, which use DateTimeUtils(Joda-Time library) way. Notes provided as commit details.
+faketime - prepared for time-dependent tests, refactored - used fake system clock pattern.<br/>
+faketime_anotherWay - added time-dependend test, which use DateTimeUtils(Joda-Time library) way. Notes are provided as commit details.
