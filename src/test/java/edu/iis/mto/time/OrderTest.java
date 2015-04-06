@@ -1,12 +1,13 @@
 package edu.iis.mto.time;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import restx.common.ThreadLocalMillisProvider;
 
 public class OrderTest {
 
@@ -27,7 +28,7 @@ public class OrderTest {
 
 	@After
 	public void tearDown() throws Exception {
-		DateTimeUtils.setCurrentMillisSystem();
+		ThreadLocalMillisProvider.setCurrentMillisSystem();
 	}
 
 	@Test(expected = OrderExpiredException.class)
@@ -38,7 +39,7 @@ public class OrderTest {
 				.plusHours(Order.VALID_PERIOD_HOURS + 1)
 				.toInstant().getMillis();
 
-		DateTimeUtils.setCurrentMillisFixed(expiredMilis);
+		ThreadLocalMillisProvider.setCurrentMillisFixed(expiredMilis);
 
 		order.confirm();
 	}
