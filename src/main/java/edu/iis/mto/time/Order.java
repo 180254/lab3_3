@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Hours;
 
 public class Order {
-	private static final int VALID_PERIOD_HOURS = 24;
+	static final int VALID_PERIOD_HOURS = 24;
 	private State orderState;
 	private List<OrderItem> items = new ArrayList<OrderItem>();
 	private DateTime subbmitionDate;
@@ -66,5 +66,9 @@ public class Order {
 
 	public static enum State {
 		CREATED, SUBMITTED, CONFIRMED, REALIZED, CANCELLED
+	}
+
+	public void setTimeSource(TimeSource timeSource) {
+		this.timeSource = timeSource;
 	}
 }
