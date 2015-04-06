@@ -31,16 +31,22 @@ public class OrderTest {
 	public final void test_OrderIsExpired_shouldThrowOrderExpiredException() {
 		final int MILIS_IN_HOUR = 60 * 60 * 1000;
 
+		order.setTimeSource(new TimeSource() {
+
+			@Override
+			public long currentTimeMillis() {
+				return 0;
+			}
+		});
 		order.submit();
 
 		order.setTimeSource(new TimeSource() {
 
 			@Override
 			public long currentTimeMillis() {
-				return System.currentTimeMillis() + (Order.VALID_PERIOD_HOURS + 1) * MILIS_IN_HOUR;
+				return (Order.VALID_PERIOD_HOURS + 1) * MILIS_IN_HOUR;
 			}
 		});
-
 		order.confirm();
 	}
 
