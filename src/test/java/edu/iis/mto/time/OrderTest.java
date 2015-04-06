@@ -1,6 +1,5 @@
 package edu.iis.mto.time;
 
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,14 +32,13 @@ public class OrderTest {
 
 	@Test(expected = OrderExpiredException.class)
 	public final void test_OrderIsExpired_shouldThrowOrderExpiredException() {
+		final int MILIS_IN_HOUR = 60 * 60 * 1000;
+
+		ThreadLocalMillisProvider.setCurrentMillisFixed(0);
 		order.submit();
 
-		long expiredMilis = new DateTime()
-				.plusHours(Order.VALID_PERIOD_HOURS + 1)
-				.toInstant().getMillis();
-
+		long expiredMilis = (Order.VALID_PERIOD_HOURS + 1) * MILIS_IN_HOUR;
 		ThreadLocalMillisProvider.setCurrentMillisFixed(expiredMilis);
-
 		order.confirm();
 	}
 
